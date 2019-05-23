@@ -1,0 +1,10 @@
+#部署tag的顺序
+1.mysql-pass.yaml
+
+2.mysql.yaml
+
+3.tag-db-init-job.yaml
+
+4.tag-db-ctrl-job.yaml
+
+5.tag.yaml
