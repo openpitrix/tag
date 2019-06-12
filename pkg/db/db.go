@@ -13,21 +13,22 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"openpitrix.io/notification/pkg/config"
+	"openpitrix.io/tag/pkg/config"
 )
 
 /*
 * MysqlConnPool
 * use gorm
  */
-type MysqlConnPool struct {
-}
 
-var instance *MysqlConnPool
-var once sync.Once
+var (
+	instance *MysqlConnPool
+	once     sync.Once
+	db       *gorm.DB
+	err      error
+)
 
-var db *gorm.DB
-var err error
+type MysqlConnPool struct{}
 
 func GetInstance() *MysqlConnPool {
 	once.Do(func() {

@@ -1,0 +1,159 @@
+// Copyright 2019 The OpenPitrix Authors. All rights reserved.
+// Use of this source code is governed by a Apache license
+// that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+package pb;
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+
+message Tag{
+    google.protobuf.StringValue tag_id = 1;
+    google.protobuf.StringValue key = 2;
+    google.protobuf.StringValue value = 3;
+    google.protobuf.StringValue creator = 4;
+    google.protobuf.Timestamp create_time = 5;
+    google.protobuf.Timestamp update_time = 6;
+}
+
+message CreateTagRequest{
+    google.protobuf.StringValue key = 1;
+    google.protobuf.StringValue value = 2;
+    google.protobuf.StringValue creator = 3;
+    google.protobuf.Timestamp create_time = 4;
+    google.protobuf.Timestamp update_time = 5;
+}
+
+message CreateTagResponse{
+    google.protobuf.StringValue tag_id = 1;
+}
+
+message DescribeTagsRequest{
+    repeated string tag_id = 1;
+    repeated string key = 2;
+    repeated string value = 3;
+    google.protobuf.Timestamp create_time = 4;
+    google.protobuf.Timestamp update_time = 5;
+}
+
+message DescribeTagsResponse{
+    uint32 total_count = 1;
+    repeated Tag tags = 2;
+}
+
+message ModifyTagRequest{
+    google.protobuf.StringValue tag_id = 1;
+    google.protobuf.StringValue key = 2;
+    google.protobuf.StringValue value = 3;
+}
+
+message ModifyTagResponse{
+    google.protobuf.StringValue tag_id = 1;
+
+}
+
+message DeleteTagsRequest{
+    repeated string tag_id = 1;
+}
+
+message DeleteTagsResponse{
+    repeated string tag_id = 1;
+}
+
+message ResourceTag{
+    google.protobuf.StringValue resource_tag_id = 1;
+    google.protobuf.StringValue resource_id = 2;
+    google.protobuf.StringValue tag_id = 3;
+    google.protobuf.Timestamp create_time = 4;
+
+}
+
+message AttachTagsRequest{
+    repeated string tag_id = 1;
+    repeated string resource_id = 2;
+}
+
+message AttachTagsResponse{
+    repeated string tag_id = 1;
+    repeated string resource_id = 2;
+}
+
+message DetachTagsRequest{
+    repeated string tag_id = 1;
+    repeated string resource_id = 2;
+}
+
+message DetachTagsResponse{
+    repeated string tag_ids = 1;
+    repeated string resource_ids = 2;
+}
+
+service tag{
+    rpc CreateTag(CreateTagRequest) returns (CreateTagResponse){
+        option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+            summary:"Create tag"
+        };
+        option (google.api.http) = {
+			post: "/v1/tag/create"
+			body: "*"
+		};
+    }
+
+    rpc DescribeTags(DescribeTagsRequest) returns (DescribeTagsResponse){
+        option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+            summary:"Describe tag"
+        };
+        option (google.api.http) = {
+			post: "/v1/tags"
+			body: "*"
+		};
+    }
+
+    rpc ModifyTag(ModifyTagRequest) returns (ModifyTagResponse){
+        option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+            summary:"Modify tag"
+        };
+        option (google.api.http) = {
+			post: "/v1/tag/modify"
+			body: "*"
+		};
+    }
+
+    rpc DeleteTags(DeleteTagsRequest) returns (DeleteTagsResponse){
+        option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+            summary:"Delete tags"
+        };
+        option (google.api.http) = {
+			post: "/v1/tag/delete"
+			body: "*"
+		};
+    }
+
+    rpc AttachTags(AttachTagsRequest) returns (AttachTagsResponse){
+        option(grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+            summary: "Attach tags"
+        };
+        option(google.api.http) = {
+            post:"/v1/tag/attach"
+            body:"*"
+        };
+    }
+
+    rpc DetachTags(DetachTagsRequest) returns (DetachTagsResponse){
+        option(grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+            summary: "Detach tags"
+        };
+        option(google.api.http) = {
+            post:"/v1/tag/detach"
+            body:"*"
+        };
+    }
+}
+
+
+

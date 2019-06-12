@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 
 syntax = "proto3";
-package notification;
+package tag;
 
 // set go package name to pb
 option go_package = "pb";

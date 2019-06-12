@@ -12,7 +12,7 @@ import (
 	"github.com/sony/sonyflake"
 	hashids "github.com/speps/go-hashids"
 
-	"openpitrix.io/notification/pkg/util/stringutil"
+	"openpitrix.io/tag/pkg/util/stringutil"
 )
 
 var sf *sonyflake.Sonyflake

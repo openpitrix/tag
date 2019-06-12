@@ -10,11 +10,11 @@ var Files = map[string]string{
 	"api.swagger.json": `{
   "swagger": "2.0",
   "info": {
-    "title": "Notification Project",
+    "title": "Tag Project",
     "version": "0.0.1",
     "contact": {
-      "name": "Notification Project",
-      "url": "https://github.com/openpitrix/notification"
+      "name": "Tag Project",
+      "url": "https://github.com/openpitrix/tag"
     }
   },
   "schemes": [
@@ -28,115 +28,15 @@ var Files = map[string]string{
     "application/json"
   ],
   "paths": {
-    "/v1/notifications": {
-      "get": {
-        "summary": "describe notifications",
-        "operationId": "DescribeNotifications",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbDescribeNotificationsResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "notification_id",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "content_type",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "owner",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "search_word",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "sort_key",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "reverse",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "format": "boolean"
-          },
-          {
-            "name": "display_columns",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "tags": [
-          "notification"
-        ]
-      },
+    "/v1/tag/attach": {
       "post": {
-        "summary": "create notification",
-        "operationId": "CreateNotification",
+        "summary": "Attach tags",
+        "operationId": "AttachTags",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbCreateNotificationResponse"
+              "$ref": "#/definitions/pbAttachTagsResponse"
             }
           }
         },
@@ -146,159 +46,24 @@ var Files = map[string]string{
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbCreateNotificationRequest"
+              "$ref": "#/definitions/pbAttachTagsRequest"
             }
           }
         ],
         "tags": [
-          "notification"
+          "tag"
         ]
       }
     },
-    "/v1/notifications/address": {
-      "get": {
-        "summary": "describe addresses",
-        "operationId": "DescribeAddresses",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbDescribeAddressesResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "address_id",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "address_list_id",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "address",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "notify_type",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "search_word",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "sort_key",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "reverse",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "format": "boolean"
-          },
-          {
-            "name": "display_columns",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "tags": [
-          "notification"
-        ]
-      },
-      "delete": {
-        "summary": "delete addresses",
-        "operationId": "DeleteAddresses",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbDeleteAddressesResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbDeleteAddressesRequest"
-            }
-          }
-        ],
-        "tags": [
-          "notification"
-        ]
-      },
+    "/v1/tag/create": {
       "post": {
-        "summary": "create address",
-        "operationId": "CreateAddress",
+        "summary": "Create tag",
+        "operationId": "CreateTag",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbCreateAddressResponse"
+              "$ref": "#/definitions/pbCreateTagResponse"
             }
           }
         },
@@ -308,174 +73,24 @@ var Files = map[string]string{
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbCreateAddressRequest"
+              "$ref": "#/definitions/pbCreateTagRequest"
             }
           }
         ],
         "tags": [
-          "notification"
-        ]
-      },
-      "patch": {
-        "summary": "modify address",
-        "operationId": "ModifyAddress",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbModifyAddressResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbModifyAddressRequest"
-            }
-          }
-        ],
-        "tags": [
-          "notification"
+          "tag"
         ]
       }
     },
-    "/v1/notifications/address_list": {
-      "get": {
-        "summary": "describe address list",
-        "operationId": "DescribeAddressList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbDescribeAddressListResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "address_list_id",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "address_list_name",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "extra",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "search_word",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "sort_key",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "reverse",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "format": "boolean"
-          },
-          {
-            "name": "display_columns",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "tags": [
-          "notification"
-        ]
-      },
-      "delete": {
-        "summary": "delete address list",
-        "operationId": "DeleteAddressList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbDeleteAddressListResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbDeleteAddressListRequest"
-            }
-          }
-        ],
-        "tags": [
-          "notification"
-        ]
-      },
+    "/v1/tag/delete": {
       "post": {
-        "summary": "create address list",
-        "operationId": "CreateAddressList",
+        "summary": "Delete tags",
+        "operationId": "DeleteTags",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbCreateAddressListResponse"
+              "$ref": "#/definitions/pbDeleteTagsResponse"
             }
           }
         },
@@ -485,49 +100,24 @@ var Files = map[string]string{
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbCreateAddressListRequest"
+              "$ref": "#/definitions/pbDeleteTagsRequest"
             }
           }
         ],
         "tags": [
-          "notification"
-        ]
-      },
-      "patch": {
-        "summary": "modify address list",
-        "operationId": "ModifyAddressList",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbModifyAddressListResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbModifyAddressListRequest"
-            }
-          }
-        ],
-        "tags": [
-          "notification"
+          "tag"
         ]
       }
     },
-    "/v1/notifications/get_service_config": {
+    "/v1/tag/detach": {
       "post": {
-        "summary": "get service configration",
-        "operationId": "GetServiceConfig",
+        "summary": "Detach tags",
+        "operationId": "DetachTags",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbServiceConfig"
+              "$ref": "#/definitions/pbDetachTagsResponse"
             }
           }
         },
@@ -537,24 +127,24 @@ var Files = map[string]string{
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbGetServiceConfigRequest"
+              "$ref": "#/definitions/pbDetachTagsRequest"
             }
           }
         ],
         "tags": [
-          "notification"
+          "tag"
         ]
       }
     },
-    "/v1/notifications/set_service_config": {
+    "/v1/tag/modify": {
       "post": {
-        "summary": "set service configration",
-        "operationId": "SetServiceConfig",
+        "summary": "Modify tag",
+        "operationId": "ModifyTag",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbSetServiceConfigResponse"
+              "$ref": "#/definitions/pbModifyTagResponse"
             }
           }
         },
@@ -564,126 +154,24 @@ var Files = map[string]string{
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbServiceConfig"
+              "$ref": "#/definitions/pbModifyTagRequest"
             }
           }
         ],
         "tags": [
-          "notification"
+          "tag"
         ]
       }
     },
-    "/v1/notifications/tasks": {
-      "get": {
-        "summary": "describe tasks",
-        "operationId": "DescribeTasks",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbDescribeTasksResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "task_id",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "notification_id",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "error_code",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "search_word",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "sort_key",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "reverse",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "format": "boolean"
-          },
-          {
-            "name": "display_columns",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "tags": [
-          "notification"
-        ]
-      }
-    },
-    "/v1/notifications/tasks:retry": {
+    "/v1/tags": {
       "post": {
-        "summary": "retry tasks",
-        "operationId": "RetryTasks",
+        "summary": "Describe tag",
+        "operationId": "DescribeTags",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbRetryTasksResponse"
+              "$ref": "#/definitions/pbDescribeTagsResponse"
             }
           }
         },
@@ -693,582 +181,227 @@ var Files = map[string]string{
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbRetryTasksRequest"
+              "$ref": "#/definitions/pbDescribeTagsRequest"
             }
           }
         ],
         "tags": [
-          "notification"
-        ]
-      }
-    },
-    "/v1/notifications/validate_email_service": {
-      "post": {
-        "summary": "validate email service",
-        "operationId": "ValidateEmailService",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbValidateEmailServiceResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbServiceConfig"
-            }
-          }
-        ],
-        "tags": [
-          "notification"
-        ]
-      }
-    },
-    "/v1/notifications:retry": {
-      "post": {
-        "summary": "retry notifications",
-        "operationId": "RetryNotifications",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbRetryNotificationsResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbRetryNotificationsRequest"
-            }
-          }
-        ],
-        "tags": [
-          "notification"
+          "tag"
         ]
       }
     }
   },
   "definitions": {
-    "pbAddress": {
+    "pbAttachTagsRequest": {
       "type": "object",
       "properties": {
-        "address_id": {
+        "tag_id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resource_id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pbAttachTagsResponse": {
+      "type": "object",
+      "properties": {
+        "tag_id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resource_id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pbCreateTagRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
           "type": "string"
         },
-        "address_list_id": {
+        "value": {
           "type": "string"
         },
-        "address": {
-          "type": "string"
-        },
-        "remarks": {
-          "type": "string"
-        },
-        "verification_code": {
-          "type": "string"
-        },
-        "status": {
+        "creator": {
           "type": "string"
         },
         "create_time": {
           "type": "string",
           "format": "date-time"
         },
-        "verify_time": {
+        "update_time": {
           "type": "string",
           "format": "date-time"
-        },
-        "status_time": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "notify_type": {
+        }
+      }
+    },
+    "pbCreateTagResponse": {
+      "type": "object",
+      "properties": {
+        "tag_id": {
           "type": "string"
         }
       }
     },
-    "pbAddressList": {
+    "pbDeleteTagsRequest": {
       "type": "object",
       "properties": {
-        "address_list_id": {
+        "tag_id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pbDeleteTagsResponse": {
+      "type": "object",
+      "properties": {
+        "tag_id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pbDescribeTagsRequest": {
+      "type": "object",
+      "properties": {
+        "tag_id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "key": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "create_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "update_time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbDescribeTagsResponse": {
+      "type": "object",
+      "properties": {
+        "total_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/pbTag"
+          }
+        }
+      }
+    },
+    "pbDetachTagsRequest": {
+      "type": "object",
+      "properties": {
+        "tag_id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resource_id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pbDetachTagsResponse": {
+      "type": "object",
+      "properties": {
+        "tag_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resource_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "pbModifyTagRequest": {
+      "type": "object",
+      "properties": {
+        "tag_id": {
           "type": "string"
         },
-        "address_list_name": {
+        "key": {
           "type": "string"
         },
-        "extra": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "pbModifyTagResponse": {
+      "type": "object",
+      "properties": {
+        "tag_id": {
+          "type": "string"
+        }
+      }
+    },
+    "pbTag": {
+      "type": "object",
+      "properties": {
+        "tag_id": {
           "type": "string"
         },
-        "status": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "creator": {
           "type": "string"
         },
         "create_time": {
           "type": "string",
           "format": "date-time"
         },
-        "status_time": {
+        "update_time": {
           "type": "string",
           "format": "date-time"
-        },
-        "address_set": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/pbAddress"
-          }
-        }
-      }
-    },
-    "pbCreateAddressListRequest": {
-      "type": "object",
-      "properties": {
-        "address_list_name": {
-          "type": "string"
-        },
-        "extra": {
-          "type": "string"
-        },
-        "address_id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pbCreateAddressListResponse": {
-      "type": "object",
-      "properties": {
-        "address_list_id": {
-          "type": "string"
-        }
-      }
-    },
-    "pbCreateAddressRequest": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string"
-        },
-        "remarks": {
-          "type": "string"
-        },
-        "verification_code": {
-          "type": "string"
-        },
-        "notify_type": {
-          "type": "string"
-        }
-      }
-    },
-    "pbCreateAddressResponse": {
-      "type": "object",
-      "properties": {
-        "address_id": {
-          "type": "string"
-        }
-      }
-    },
-    "pbCreateNotificationRequest": {
-      "type": "object",
-      "properties": {
-        "content_type": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
-        },
-        "short_content": {
-          "type": "string"
-        },
-        "expired_days": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "owner": {
-          "type": "string"
-        },
-        "address_info": {
-          "type": "string"
-        },
-        "available_start_time": {
-          "type": "string"
-        },
-        "available_end_time": {
-          "type": "string"
-        },
-        "extra": {
-          "type": "string"
-        }
-      }
-    },
-    "pbCreateNotificationResponse": {
-      "type": "object",
-      "properties": {
-        "notification_id": {
-          "type": "string"
-        }
-      }
-    },
-    "pbDeleteAddressListRequest": {
-      "type": "object",
-      "properties": {
-        "address_list_id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pbDeleteAddressListResponse": {
-      "type": "object",
-      "properties": {
-        "address_list_id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pbDeleteAddressesRequest": {
-      "type": "object",
-      "properties": {
-        "address_id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pbDeleteAddressesResponse": {
-      "type": "object",
-      "properties": {
-        "address_id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pbDescribeAddressListResponse": {
-      "type": "object",
-      "properties": {
-        "total_count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "address_list_set": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/pbAddressList"
-          }
-        }
-      }
-    },
-    "pbDescribeAddressesResponse": {
-      "type": "object",
-      "properties": {
-        "total_count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "address_set": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/pbAddress"
-          }
-        }
-      }
-    },
-    "pbDescribeNotificationsResponse": {
-      "type": "object",
-      "properties": {
-        "total_count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "notification_set": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/pbNotification"
-          }
-        }
-      }
-    },
-    "pbDescribeTasksResponse": {
-      "type": "object",
-      "properties": {
-        "total_count": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "task_set": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/pbTask"
-          }
-        }
-      }
-    },
-    "pbEmailServiceConfig": {
-      "type": "object",
-      "properties": {
-        "protocol": {
-          "type": "string"
-        },
-        "email_host": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "display_sender": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "ssl_enable": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      }
-    },
-    "pbGetServiceConfigRequest": {
-      "type": "object",
-      "properties": {
-        "service_type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pbModifyAddressListRequest": {
-      "type": "object",
-      "properties": {
-        "address_list_id": {
-          "type": "string"
-        },
-        "address_list_name": {
-          "type": "string"
-        },
-        "extra": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "address_id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pbModifyAddressListResponse": {
-      "type": "object",
-      "properties": {
-        "address_list_id": {
-          "type": "string"
-        }
-      }
-    },
-    "pbModifyAddressRequest": {
-      "type": "object",
-      "properties": {
-        "address_id": {
-          "type": "string"
-        },
-        "address": {
-          "type": "string"
-        },
-        "remarks": {
-          "type": "string"
-        },
-        "verification_code": {
-          "type": "string"
-        },
-        "notify_type": {
-          "type": "string"
-        }
-      }
-    },
-    "pbModifyAddressResponse": {
-      "type": "object",
-      "properties": {
-        "address_id": {
-          "type": "string"
-        }
-      }
-    },
-    "pbNotification": {
-      "type": "object",
-      "properties": {
-        "notification_id": {
-          "type": "string"
-        },
-        "content_type": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
-        },
-        "short_content": {
-          "type": "string"
-        },
-        "expired_days": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "status": {
-          "type": "string"
-        },
-        "create_time": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "status_time": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "owner": {
-          "type": "string"
-        },
-        "address_info": {
-          "type": "string"
-        },
-        "available_start_time": {
-          "type": "string"
-        },
-        "available_end_time": {
-          "type": "string"
-        },
-        "extra": {
-          "type": "string"
-        }
-      }
-    },
-    "pbRetryNotificationsRequest": {
-      "type": "object",
-      "properties": {
-        "notification_id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pbRetryNotificationsResponse": {
-      "type": "object",
-      "properties": {
-        "notification_set": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/pbNotification"
-          }
-        }
-      }
-    },
-    "pbRetryTasksRequest": {
-      "type": "object",
-      "properties": {
-        "task_id": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "pbRetryTasksResponse": {
-      "type": "object",
-      "properties": {
-        "task_set": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/pbTask"
-          }
-        }
-      }
-    },
-    "pbServiceConfig": {
-      "type": "object",
-      "properties": {
-        "email_service_config": {
-          "$ref": "#/definitions/pbEmailServiceConfig"
-        }
-      }
-    },
-    "pbSetServiceConfigResponse": {
-      "type": "object",
-      "properties": {
-        "is_succ": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      }
-    },
-    "pbTask": {
-      "type": "object",
-      "properties": {
-        "task_id": {
-          "type": "string"
-        },
-        "notification_id": {
-          "type": "string"
-        },
-        "error_code": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "status": {
-          "type": "string"
-        },
-        "create_time": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "status_time": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "directive": {
-          "type": "string"
-        }
-      }
-    },
-    "pbValidateEmailServiceResponse": {
-      "type": "object",
-      "properties": {
-        "is_succ": {
-          "type": "boolean",
-          "format": "boolean"
         }
       }
     }

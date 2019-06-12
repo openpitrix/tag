@@ -5,20 +5,11 @@
 package constants
 
 const (
-	ServiceName = "Notification"
+	ServiceName = "tag"
 )
 
 const (
 	TagName = "json"
-)
-
-const (
-	EtcdPrefix                  = "notification/"
-	NotificationTaskTopicPrefix = "nf-task"
-	NotificationTopicPrefix     = "nf-job"
-	MaxWorkingTasks             = 5
-	MaxWorkingNotifications     = 5
-	MaxTaskRetryTimes           = 3
 )
 
 const (
@@ -36,34 +27,6 @@ const (
 )
 
 const (
-	NotifyTypeEmail     = "email"
-	NotifyTypeWebsocket = "websocket"
-	NotifyTypeSms       = "sms"
-	NotifyTypeWeChat    = "wechat"
-)
-
-var NotifyTypes = []string{
-	NotifyTypeEmail,
-	NotifyTypeWebsocket,
-	NotifyTypeSms,
-	NotifyTypeWeChat,
-}
-
-const (
-	StatusPending    = "pending"
-	StatusSending    = "sending"
-	StatusSuccessful = "successful"
-	StatusFailed     = "failed"
-)
-
-var SendingStatuses = []string{
-	StatusPending,
-	StatusSending,
-	StatusSuccessful,
-	StatusFailed,
-}
-
-const (
 	StatusActive   = "active"
 	StatusDisabled = "disabled"
 	StatusDeleted  = "deleted"
@@ -74,8 +37,3 @@ var RecordStatuses = []string{
 	StatusDisabled,
 	StatusDeleted,
 }
-
-const (
-	WsMessageType   = "ws_message_type"
-	WsMessagePrefix = "ws_"
-)

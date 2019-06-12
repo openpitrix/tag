@@ -10,19 +10,19 @@ import (
 	"github.com/fatih/structs"
 	"github.com/golang/protobuf/ptypes/wrappers"
 
-	nfdb "openpitrix.io/notification/pkg/db"
-	"openpitrix.io/notification/pkg/gerr"
-	"openpitrix.io/notification/pkg/util/stringutil"
+	"openpitrix.io/tag/pkg/db"
+	"openpitrix.io/tag/pkg/gerr"
+	"openpitrix.io/tag/pkg/util/stringutil"
 )
 
 type checker struct {
 	ctx          context.Context
-	req          nfdb.Request
+	req          db.Request
 	required     []string
 	stringChosen map[string][]string
 }
 
-func NewChecker(ctx context.Context, req nfdb.Request) *checker {
+func NewChecker(ctx context.Context, req db.Request) *checker {
 	return &checker{
 		ctx:          ctx,
 		req:          req,
@@ -41,10 +41,6 @@ func (c *checker) checkRequired(param string, value interface{}) error {
 		switch v := value.(type) {
 		case string:
 			if v == "" {
-				return gerr.New(c.ctx, gerr.InvalidArgument, gerr.ErrorMissingParameter, param)
-			}
-		case *wrappers.StringValue:
-			if v == nil || v.GetValue() == "" {
 				return gerr.New(c.ctx, gerr.InvalidArgument, gerr.ErrorMissingParameter, param)
 			}
 		case *wrappers.BytesValue:
@@ -118,7 +114,7 @@ func (c *checker) chainChecker(param string, value interface{}, checks ...func(s
 
 func (c *checker) Exec() error {
 	for _, field := range structs.Fields(c.req) {
-		param := nfdb.GetFieldName(field)
+		param := db.GetFieldName(field)
 		value := field.Value()
 
 		err := c.chainChecker(param, value,

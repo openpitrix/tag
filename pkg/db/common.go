@@ -5,16 +5,29 @@
 package db
 
 import (
-	"strings"
-
 	"github.com/fatih/structs"
 	"github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/jinzhu/gorm"
 	"openpitrix.io/logger"
-
-	"openpitrix.io/notification/pkg/models"
-	"openpitrix.io/notification/pkg/util/stringutil"
+	"openpitrix.io/tag/pkg/util/stringutil"
+	"strings"
 )
+
+var (
+	SearchWordColumnTable = []string{}
+
+	// columns that can be search through sql '=' operator
+	IndexedColumns = map[string][]string{}
+
+	// columns that can be search through sql 'like' operator
+	SearchColumns = map[string][]string{}
+)
+
+func SetQuery(searchWordColumnTable []string, indexedColumns, searchColumns map[string][]string) {
+	SearchWordColumnTable = searchWordColumnTable
+	IndexedColumns = indexedColumns
+	SearchColumns = searchColumns
+}
 
 type Request interface {
 	Reset()
@@ -22,10 +35,12 @@ type Request interface {
 	ProtoMessage()
 	Descriptor() ([]byte, []int)
 }
+
 type RequestWithSortKey interface {
 	Request
 	GetSortKey() *wrappers.StringValue
 }
+
 type RequestWithReverse interface {
 	RequestWithSortKey
 	GetReverse() *wrappers.BoolValue
@@ -91,7 +106,7 @@ func (c *Chain) BuildFilterConditions(req Request, tableName string, exclude ...
 	for _, field := range structs.Fields(req) {
 		column := GetFieldName(field)
 		param := field.Value()
-		indexedColumns, ok := models.IndexedColumns[tableName]
+		indexedColumns, ok := IndexedColumns[tableName]
 		if ok && stringutil.StringIn(column, indexedColumns) {
 			value := getReqValue(param)
 			if value != nil {
@@ -99,7 +114,7 @@ func (c *Chain) BuildFilterConditions(req Request, tableName string, exclude ...
 				c.DB = c.Where(key+" in (?)", value)
 			}
 		}
-		if column == SearchWordColumnName && stringutil.Contains(models.SearchWordColumnTable, tableName) {
+		if column == SearchWordColumnName && stringutil.Contains(SearchWordColumnTable, tableName) {
 			value := getReqValue(param)
 			c.getSearchFilter(false, tableName, value, exclude...)
 		}
@@ -111,7 +126,7 @@ func (c *Chain) BuildFilterConditionsWithPrefix(req Request, tableName string, e
 	for _, field := range structs.Fields(req) {
 		column := GetFieldName(field)
 		param := field.Value()
-		indexedColumns, ok := models.IndexedColumns[tableName]
+		indexedColumns, ok := IndexedColumns[tableName]
 		if stringutil.Contains(exclude, column) {
 			continue
 		}
@@ -124,7 +139,7 @@ func (c *Chain) BuildFilterConditionsWithPrefix(req Request, tableName string, e
 			}
 		}
 
-		if column == SearchWordColumnName && stringutil.Contains(models.SearchWordColumnTable, tableName) {
+		if column == SearchWordColumnName && stringutil.Contains(SearchWordColumnTable, tableName) {
 			value := getReqValue(param)
 			c.getSearchFilter(true, tableName, value, exclude...)
 		}
@@ -171,7 +186,7 @@ func (c *Chain) getSearchFilter(withPrefix bool, tableName string, value interfa
 	var conditions []string
 	if vs, ok := value.([]string); ok {
 		for _, v := range vs {
-			for _, column := range models.SearchColumns[tableName] {
+			for _, column := range SearchColumns[tableName] {
 				if stringutil.Contains(exclude, column) {
 					continue
 				}

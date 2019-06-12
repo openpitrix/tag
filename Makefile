@@ -74,6 +74,7 @@ check: ## go vet and race
 build: fmt-all ## Build notification image
 	mkdir -p ./tmp/bin
 	$(call get_build_flags)
+	#$(RUN_IN_DOCKER) env GOPROXY=https://goproxy.io/ env GO111MODULE=on time go install -tags netgo -v -ldflags '$(BUILD_FLAG)' $(foreach cmd,$(CMDS),$(TRAG.Gopkg)/cmd/$(cmd))
 	$(RUN_IN_DOCKER) env GO111MODULE=on time go install -tags netgo -v -ldflags '$(BUILD_FLAG)' $(foreach cmd,$(CMDS),$(TRAG.Gopkg)/cmd/$(cmd))
 	docker build -t $(TARG.Name) -f ./Dockerfile.dev ./tmp/bin
 	docker image prune -f 1>/dev/null 2>&1

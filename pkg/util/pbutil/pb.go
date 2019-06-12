@@ -12,7 +12,7 @@ import (
 	"github.com/golang/protobuf/ptypes/wrappers"
 	"openpitrix.io/logger"
 
-	"openpitrix.io/notification/pkg/constants"
+	"openpitrix.io/tag/pkg/constants"
 )
 
 type RequestHadOffset interface {

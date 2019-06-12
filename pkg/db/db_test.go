@@ -11,8 +11,8 @@ import (
 	"github.com/jinzhu/gorm"
 	"openpitrix.io/logger"
 
-	pkg "openpitrix.io/notification/pkg"
-	"openpitrix.io/notification/pkg/config"
+	pkg "openpitrix.io/tag/pkg"
+	"openpitrix.io/tag/pkg/config"
 )
 
 type Product struct {

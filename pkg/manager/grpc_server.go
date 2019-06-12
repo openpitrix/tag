@@ -25,8 +25,8 @@ import (
 	"google.golang.org/grpc/status"
 	"openpitrix.io/logger"
 
-	"openpitrix.io/notification/pkg/gerr"
-	"openpitrix.io/notification/pkg/util/ctxutil"
+	"openpitrix.io/tag/pkg/gerr"
+	"openpitrix.io/tag/pkg/util/ctxutil"
 )
 
 type checkerT func(ctx context.Context, req interface{}) error

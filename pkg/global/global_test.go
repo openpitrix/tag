@@ -7,7 +7,7 @@ package global
 import (
 	"testing"
 
-	pkg "openpitrix.io/notification/pkg"
+	pkg "openpitrix.io/tag/pkg"
 )
 
 func TestSetGlobalCfg(t *testing.T) {

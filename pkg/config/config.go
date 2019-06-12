@@ -13,7 +13,7 @@ import (
 	"github.com/koding/multiconfig"
 	"openpitrix.io/logger"
 
-	"openpitrix.io/notification/pkg/constants"
+	"openpitrix.io/tag/pkg/constants"
 )
 
 type Config struct {
@@ -32,7 +32,6 @@ type Config struct {
 		//LogMode  bool   `default:"false"`
 		LogMode bool `default:"true"`
 	}
-
 
 	App struct {
 		//Host string `default:"127.0.0.1"`
